@@ -38,7 +38,7 @@ const handler = NextAuth({
                     user.hashedPassword
                 )
 
-                if (isCorrectPassword) {
+                if (!isCorrectPassword) {
                     throw new Error("Invalid credentials")
                 }
 

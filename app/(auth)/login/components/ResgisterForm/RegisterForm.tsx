@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { signIn } from "next-auth/react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -19,36 +18,40 @@ import { toast } from "@/components/ui/use-toast"
 
 const formSchema = z.object({
   email: z.string().min(2).max(50),
-  password: z.string().min(2).max(50)
+  password: z.string().min(2).max(50),
+  username: z.string().min(2).max(50)
 })
 
-
-export default function LoginForm() {
+export default function RegisterForm() {
   const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
-      password: ""
+      password: "",
+      username: ""
     },
   })
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const response = await signIn("credentials", {
-      email: values.email,
-      password: values.password,
-      redirect: false
+    const response = await fetch("/api/auth/register", {
+      method: 'POST',
+      body: JSON.stringify({
+        email: values.email,
+        password: values.password,
+        username: values.username
+      })
     })
 
-    if (response?.status === 200) {
-      toast({
-        title: "Login realizado con éxito"
-      })
+    if (response.status === 200) {
       router.push("/")
+      toast({
+        title: "Registro realizado con éxito"
+      })
     } else {
       toast({
-        title: "Error al realizar el login",
+        title: "Error al realizar el registro",
         variant: "destructive"
       })
     }
@@ -73,6 +76,20 @@ export default function LoginForm() {
 
         <FormField
           control={form.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Username</FormLabel>
+              <FormControl>
+                <Input placeholder="User..." {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
           name="password"
           render={({ field }) => (
             <FormItem>
@@ -84,7 +101,8 @@ export default function LoginForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">Submit</Button>
+
+        <Button type="submit" className="w-full">Register</Button>
       </form>
     </Form>
   )

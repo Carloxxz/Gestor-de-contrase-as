@@ -1,7 +1,16 @@
+import { getServerSession } from "next-auth";
 import ImageAuth from "./components/ImageAuth/ImageAuth";
 import TabsForm from "./components/TabsForm/TabsForm";
+import { redirect } from "next/navigation";
 
-export default function LoginPage() {
+export default async function LoginPage() {
+
+    const session = await getServerSession()
+
+    if (session) {
+        redirect("/")
+    }
+
     return (
         <div className="grid md:grid-cols-2 h-full max-h-screen overflow-hidden">
             <div className="flex justify-center h-full">
@@ -11,7 +20,7 @@ export default function LoginPage() {
                     <p className="text-center mt-4 mb-6 text-slate-400 text-sm">
                         Welcome back, Please enter your details
                     </p>
-                    <TabsForm />
+                    {<TabsForm />}
                 </div>
             </div>
             <ImageAuth />

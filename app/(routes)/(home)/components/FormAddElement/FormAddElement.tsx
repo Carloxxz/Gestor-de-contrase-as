@@ -25,9 +25,11 @@ import { generatePassword } from "@/lib/generatePassword"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
 import { useRouter } from "next/navigation"
+import { FormAddElementProps } from "./FormAddElement.type"
 
 
-export default function FormAddElement() {
+export default function FormAddElement(props: FormAddElementProps) {
+    const { userId } = props
     const [showPassword, setShowPassword] = useState(false)
     const router = useRouter()
 
@@ -42,7 +44,7 @@ export default function FormAddElement() {
             password: "",
             urlWebSite: "",
             notes: "",
-            userId: ""
+            userId
         },
     })
 
@@ -59,8 +61,7 @@ export default function FormAddElement() {
                 username: "",
                 password: "",
                 urlWebSite: "",
-                notes: "",
-                userId: ""
+                notes: ""
             })
 
             router.refresh()
