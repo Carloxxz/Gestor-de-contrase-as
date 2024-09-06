@@ -42,7 +42,7 @@ export default function FormAddElement(props: FormAddElementProps) {
             directory: "",
             username: "",
             password: "",
-            urlWebSite: "",
+            urlWebsite: "",
             notes: "",
             userId
         },
@@ -60,7 +60,7 @@ export default function FormAddElement(props: FormAddElementProps) {
                 directory: "",
                 username: "",
                 password: "",
-                urlWebSite: "",
+                urlWebsite: "",
                 notes: ""
             })
 
@@ -81,7 +81,7 @@ export default function FormAddElement(props: FormAddElementProps) {
     }
 
     const updateUrl = () => {
-        form.setValue("urlWebSite", window.location.href)
+        form.setValue("urlWebsite", window.location.href)
     }
 
     return (
@@ -195,7 +195,7 @@ export default function FormAddElement(props: FormAddElementProps) {
 
                     <FormField
                         control={form.control}
-                        name="urlWebSite"
+                        name="urlWebsite"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>URL Website</FormLabel>

@@ -23,7 +23,8 @@ export default function SidebarMobile() {
             <SheetContent side="left" className="bg-blue-800 text-white">
                 <SheetHeader className="text-left mb-5">
                     <SheetTitle className="text-white">Password</SheetTitle>
-                    <SheetDescription>
+                    <SheetDescription
+                    className="text-slate-400">
                         Create and manage all of your password
                     </SheetDescription>
                 </SheetHeader>
