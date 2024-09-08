@@ -52,20 +52,10 @@ export default function FormEditElement(props: FormEditElementProps) {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.post('/api/items', values)
-      toast({ title: "Item creado" })
-      form.reset({
-        typeElement: "",
-        isFavourite: false,
-        name: "",
-        directory: "",
-        username: "",
-        password: "",
-        urlWebsite: "",
-        notes: ""
-      })
+      await axios.patch(`/api/items/${dataElement.id}`, values)
+      toast({ title: "Item editado" })
 
-      router.refresh()
+      router.push("/")
 
     } catch (error) {
       toast({
@@ -74,6 +64,15 @@ export default function FormEditElement(props: FormEditElementProps) {
       })
       console.error(error)
     }
+  }
+
+  const generateRandomPassword = () => {
+    const password = generatePassword()
+    form.setValue("password", password)
+  }
+
+  const updateUrl = () => {
+    form.setValue("urlWebsite", window.location.href)
   }
 
   return (
@@ -196,7 +195,7 @@ export default function FormEditElement(props: FormEditElementProps) {
                   <Earth
                     className="absolute top-3 right-2 cursor-pointer"
                     size={18}
-                  // onClick={updateUrl}
+                    onClick={updateUrl}
                   />
                 </div>
               </FormControl>
@@ -215,7 +214,7 @@ export default function FormEditElement(props: FormEditElementProps) {
                 <Shuffle
                   className="cursor-pointer"
                   size={15}
-                // onClick={generateRandomPassword} 
+                  onClick={generateRandomPassword}
                 />
               </FormLabel>
               <FormControl>

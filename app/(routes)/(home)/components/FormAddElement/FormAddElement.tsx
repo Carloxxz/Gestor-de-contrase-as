@@ -29,7 +29,7 @@ import { FormAddElementProps } from "./FormAddElement.type"
 
 
 export default function FormAddElement(props: FormAddElementProps) {
-    const { userId } = props
+    const { userId, closeDialogAndDropdown } = props
     const [showPassword, setShowPassword] = useState(false)
     const router = useRouter()
 
@@ -63,7 +63,7 @@ export default function FormAddElement(props: FormAddElementProps) {
                 urlWebsite: "",
                 notes: ""
             })
-
+            closeDialogAndDropdown()
             router.refresh()
 
         } catch (error) {

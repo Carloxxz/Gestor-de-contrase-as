@@ -68,7 +68,7 @@ export default function HeaderMain(props: HeaderMainProps) {
                     <DialogHeader>
                         <DialogTitle>Nuevo elemento</DialogTitle>
                     </DialogHeader>
-                    {typeElement === 'password' && <FormAddElement userId={userId} />}
+                    {typeElement === 'password' && <FormAddElement userId={userId} closeDialogAndDropdown={closeDialogAndDropdown} />}
                     {typeElement === 'folder' && <p>Form folder</p>}
                 </DialogContent>
             </Dialog>
