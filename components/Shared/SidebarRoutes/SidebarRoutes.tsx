@@ -10,6 +10,7 @@ import { BarChart, DoorClosed, House, RectangleEllipsis } from "lucide-react"
 import Link from "next/link"
 import SingleItem from "../SingleItem/SingleItem"
 import { dataSidebarConfiguration, dataSidebarElements } from "./SidebarRoutes.data"
+import { signOut } from "next-auth/react"
 
 
 export default function SidebarRoutes() {
@@ -90,12 +91,12 @@ export default function SidebarRoutes() {
                 </ Accordion>
             ))}
 
-            <SingleItem href="/analytic" label="Analytics" icon={BarChart} />
+            <SingleItem href="/analytics" label="Analytics" icon={BarChart} />
             <SingleItem
                 href="#"
                 label="Close session"
                 icon={DoorClosed}
-                onClick={() => console.log("close")} />
+                onClick={() => signOut()} />
         </div>
     )
 }

@@ -8,7 +8,7 @@ export default function TabsForm() {
     <Tabs defaultValue="signin" className="w-[400px]">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="signin">Sign in</TabsTrigger>
-        <TabsTrigger value="signup">Signup</TabsTrigger>
+        <TabsTrigger value="signup">Sign up</TabsTrigger>
       </TabsList>
       <TabsContent value="signin">
         <Card>
